@@ -41,7 +41,6 @@ export const calculateEventLayout = (events: CalendarEvent[]): LayoutEvent[] => 
       currentCluster.push(event);
       clusterEnd = event.endMs;
     } else {
-      // If event starts before the current cluster ends, it belongs to the cluster
       if (event.startMs < clusterEnd) {
         currentCluster.push(event);
         clusterEnd = Math.max(clusterEnd, event.endMs);
@@ -56,7 +55,6 @@ export const calculateEventLayout = (events: CalendarEvent[]): LayoutEvent[] => 
 
   // 3. Assign Columns within clusters
   for (const cluster of clusters) {
-    // Reset
     for (const e of cluster) e.colIndex = -1;
 
     for (let i = 0; i < cluster.length; i++) {
@@ -65,7 +63,6 @@ export const calculateEventLayout = (events: CalendarEvent[]): LayoutEvent[] => 
 
       for (let j = 0; j < i; j++) {
         const prev = cluster[j];
-        // Check overlap
         if (event.startMs < prev.endMs && event.endMs > prev.startMs) {
           existingCols.add(prev.colIndex);
         }
@@ -95,14 +92,12 @@ export const calculateEventLayout = (events: CalendarEvent[]): LayoutEvent[] => 
       ...event,
       style: {
         position: "absolute",
-        top: `${(startMinutes / 1440) * 100}%`,
-        height: `${(durationMinutes / 1440) * 100}%`,
-        left: `${leftPercent}%`,
-        width: `calc(${widthPercent}% + ${event.maxCols > 1 ? "1px" : "0px"})`, // Slight overlap to hide border gaps
+        top: `calc(${ (startMinutes / 1440) * 100 }% + 1px)`,
+        height: `calc(${ (durationMinutes / 1440) * 100 }% - 2px)`,
+        left: `calc(${leftPercent}% + 1px)`,
+        width: `calc(${widthPercent}% - 2px)`,
         zIndex: 10 + event.colIndex,
-        border: "1px solid white", // Ensure overlap is visible/clean
       } as React.CSSProperties,
     };
   });
 };
-

@@ -57,7 +57,7 @@ export const WeekView: React.FC<WeekViewProps> = ({ currentDate, events }) => {
             <div
               key={day.toString()}
               className={cn(
-                "p-2 text-center border-r last:border-r-0 flex flex-col items-center justify-center transition-colors",
+                "p-2 text-center border-r last:border-r-0 flex flex-col items-center justify-center transition-colors min-w-0",
                 isToday(day) ? "bg-primary/5" : "bg-background"
               )}
             >
@@ -113,7 +113,7 @@ export const WeekView: React.FC<WeekViewProps> = ({ currentDate, events }) => {
               return (
                 <div
                   key={day.toString()}
-                  className="relative border-r border-border/50 last:border-r-0 h-full bg-background/50"
+                  className="relative border-r border-border/50 last:border-r-0 h-full bg-background/50 min-w-0"
                 >
                   {layoutEvents.map((event) => {
                     const durationMinutes = differenceInMinutes(
@@ -126,7 +126,7 @@ export const WeekView: React.FC<WeekViewProps> = ({ currentDate, events }) => {
                       <div
                         key={event.id}
                         className={cn(
-                          "absolute rounded-md border border-primary/10 bg-primary/10 text-xs overflow-hidden cursor-pointer hover:brightness-95 transition-all hover:shadow-md hover:z-20 hover:scale-[1.02] flex flex-col",
+                          "absolute rounded-md border border-primary/10 bg-primary/10 text-xs overflow-hidden cursor-pointer hover:brightness-95 transition-all hover:shadow-md hover:z-20 hover:scale-[1.01] flex flex-col",
                           isShort ? "justify-center px-1" : "p-1.5"
                         )}
                         style={{

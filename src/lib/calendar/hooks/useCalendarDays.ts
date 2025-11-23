@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval } from "date-fns";
+import { startOfMonth, startOfWeek, eachDayOfInterval, addDays } from "date-fns";
 
 export const useCalendarDays = (currentDate: Date) => {
   return useMemo(() => {
     const monthStart = startOfMonth(currentDate);
-    const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
-    const endDate = endOfWeek(monthEnd);
+    // Always generate 42 days (6 weeks) to keep calendar height consistent
+    const endDate = addDays(startDate, 41);
 
     return eachDayOfInterval({
       start: startDate,
@@ -14,4 +14,3 @@ export const useCalendarDays = (currentDate: Date) => {
     });
   }, [currentDate]);
 };
-

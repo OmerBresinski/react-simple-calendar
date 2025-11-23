@@ -19,7 +19,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
     "build": "npm run build:css && tsup",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "publish": "npm run build && npm publish --access public"
   },
   "keywords": [
     "calendar",

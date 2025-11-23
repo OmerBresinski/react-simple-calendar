@@ -5,7 +5,6 @@ import {
   addDays,
   isSameDay,
   differenceInMinutes,
-  startOfDay,
   isToday,
 } from "date-fns";
 import { type CalendarEvent } from "../types";
@@ -53,7 +52,7 @@ export const WeekView: React.FC<WeekViewProps> = ({ currentDate, events }) => {
       <div className="flex border-b sticky top-0 bg-background z-20 shadow-sm">
         <div className="w-16 flex-shrink-0 border-r bg-muted/5" />
         <div className="flex-1 grid grid-cols-7">
-          {weekDays.map((day, i) => (
+          {weekDays.map((day) => (
             <div
               key={day.toString()}
               className={cn(
@@ -106,7 +105,7 @@ export const WeekView: React.FC<WeekViewProps> = ({ currentDate, events }) => {
             </div>
 
             {/* Vertical Lines (Days) & Events */}
-            {weekDays.map((day, i) => {
+            {weekDays.map((day) => {
               const dayEvents = getEventsForDay(day);
               const layoutEvents = calculateEventLayout(dayEvents);
 

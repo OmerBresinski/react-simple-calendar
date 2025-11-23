@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { format, differenceInMinutes, startOfDay, isSameDay } from "date-fns";
+import { format, differenceInMinutes, isSameDay } from "date-fns";
 import { type CalendarEvent } from "../types";
 import { cn } from "@/lib/utils";
 import {
@@ -17,8 +17,13 @@ interface DayViewProps {
 
 export const DayView: React.FC<DayViewProps> = ({ currentDate, events }) => {
   const hours = Array.from({ length: 24 }, (_, i) => i);
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
-  const [anchorPosition, setAnchorPosition] = useState<{ x: number; y: number } | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
+    null
+  );
+  const [anchorPosition, setAnchorPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   const handleEventClick = (e: React.MouseEvent, event: CalendarEvent) => {
     e.preventDefault();
@@ -27,7 +32,9 @@ export const DayView: React.FC<DayViewProps> = ({ currentDate, events }) => {
     setAnchorPosition({ x: e.clientX, y: e.clientY });
   };
 
-  const dayEvents = events.filter((event) => isSameDay(event.start, currentDate));
+  const dayEvents = events.filter((event) =>
+    isSameDay(event.start, currentDate)
+  );
   const layoutEvents = calculateEventLayout(dayEvents);
 
   return (
@@ -71,7 +78,10 @@ export const DayView: React.FC<DayViewProps> = ({ currentDate, events }) => {
             {/* Events */}
             <div className="relative h-full w-full">
               {layoutEvents.map((event) => {
-                const durationMinutes = differenceInMinutes(event.end, event.start);
+                const durationMinutes = differenceInMinutes(
+                  event.end,
+                  event.start
+                );
                 const isShort = durationMinutes < 45;
 
                 return (
@@ -92,27 +102,29 @@ export const DayView: React.FC<DayViewProps> = ({ currentDate, events }) => {
                     onClick={(e) => handleEventClick(e, event)}
                   >
                     {isShort ? (
-                       <div className="flex items-center gap-2 min-w-0 w-full">
-                            <div className="font-semibold truncate text-xs">
-                              {event.title}
-                            </div>
-                            <div className="opacity-80 whitespace-nowrap text-[10px]">
-                              {format(event.start, "h:mm")}
-                            </div>
+                      <div className="flex items-center gap-2 min-w-0 w-full">
+                        <div className="font-semibold truncate text-xs">
+                          {event.title}
                         </div>
+                        <div className="opacity-80 whitespace-nowrap text-[10px]">
+                          {format(event.start, "h:mm")}
+                        </div>
+                      </div>
                     ) : (
-                        <>
-                            <div className="font-semibold truncate flex-shrink-0">{event.title}</div>
-                            <div className="opacity-80 truncate text-xs mt-0.5 flex-shrink-0">
-                            {format(event.start, "h:mm a")} -{" "}
-                            {format(event.end, "h:mm a")}
-                            </div>
-                            {event.description && durationMinutes > 60 && (
-                            <div className="opacity-70 truncate text-xs mt-1 min-h-0">
-                                {event.description}
-                            </div>
-                            )}
-                        </>
+                      <>
+                        <div className="font-semibold truncate flex-shrink-0">
+                          {event.title}
+                        </div>
+                        <div className="opacity-80 truncate text-xs mt-0.5 flex-shrink-0">
+                          {format(event.start, "h:mm a")} -{" "}
+                          {format(event.end, "h:mm a")}
+                        </div>
+                        {event.description && durationMinutes > 60 && (
+                          <div className="opacity-70 truncate text-xs mt-1 min-h-0">
+                            {event.description}
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 );

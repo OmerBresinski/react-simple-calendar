@@ -1,14 +1,14 @@
 {
   "name": "@omerbres/react-simple-calendar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A headless Shadcn-powered calendar component with month, week and day views.",
   "type": "module",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },

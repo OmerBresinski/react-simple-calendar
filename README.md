@@ -11,10 +11,12 @@ npm install @omerbres/react-simple-calendar
 yarn add @omerbres/react-simple-calendar
 ```
 
-`react-simple-calendar` has two peer dependencies – `react` and `react-dom` (v18.2+). Everything else is bundled for you, including a tiny stylesheet that provides the structural CSS. Import it once at the root of your app:
+`react-simple-calendar` has two peer dependencies – `react` and `react-dom` (v18.2+).
+
+**Important:** You must import the bundled styles once in your application root:
 
 ```ts
-import "@omerbres/react-simple-calendar/styles.css";
+import "@omerbres/react-simple-calendar/dist/styles.css";
 ```
 
 ### Provide your own colors / tokens
@@ -45,7 +47,7 @@ The library reads the standard Shadcn/Tailwind CSS variables (`--background`, `-
 ## Usage
 
 ```tsx
-import "@omerbres/react-simple-calendar/styles.css";
+import "@omerbres/react-simple-calendar/dist/styles.css";
 import { Calendar } from "@omerbres/react-simple-calendar";
 
 const events = [
@@ -85,4 +87,4 @@ npm install
 npm run build        # bundles dist/ with tsup
 ```
 
-Publishing to npm is as easy as `npm publish` once `npm run build:lib` finishes (it outputs files inside `dist/`).
+Publishing to npm is as easy as `npm publish` once `npm run build` finishes (it outputs files inside `dist/`).

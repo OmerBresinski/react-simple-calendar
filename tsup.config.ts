@@ -10,5 +10,5 @@ export default defineConfig({
   target: "es2019",
   external: ["react", "react-dom"],
   tsconfig: "./tsconfig.lib.json",
+  injectStyle: false,
 });
-
